@@ -1,6 +1,3 @@
-
-
-
 function loadCarrito(){
   prods=retrieveCarritoFromString(datos);
   storeCarrito("Productos",prods);
@@ -20,6 +17,139 @@ function definePrototype(){
 		
 	}
 }
+
+function agregarAlCarro(codLibro){
+	
+		
+		var Books =  cargarLibros();
+		var Libro = Books[codLibro-1];
+		var carrito = localStorage.getItem('carrito');
+		
+		if(carrito != null){
+			var json =  carrito + "," + JSON.stringify(Libro);
+			localStorage.setItem('carrito', json);
+		}
+		else{
+			var json = JSON.stringify(Libro);
+			localStorage.setItem('carrito', json);
+		}
+
+	
+		/*var json = localStorage.getItem('carrito');
+		var obj = JSON.parse(json);*/
+	
+}
+function loadBd(){
+	Books = cargarLibros();
+}
+function loadData(){
+
+	loadBd();
+	
+
+	$(document).ready(function() {
+    //do jQuery stuff when DOM is ready
+	
+		var str="";
+		
+		for (var i = 0; i < Books.length; i++) {
+			var brows = Books[i];	
+			str += "<div class='col-md-3 col-sm-6 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
+			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
+		}
+
+        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
+		var tableReady = str;
+		var tableContainer = document.getElementById("table_div");
+		tableContainer.innerHTML =  tableReady;
+	});
+	
+	modalValues();
+
+}
+function loadCarritoData(){
+	
+	loadBd();
+
+	obj = localStorage.getItem('carrito');
+	BooksCarrito = JSON.parse("[" +obj+"]");
+	
+
+	$(document).ready(function() {
+    //do jQuery stuff when DOM is ready
+	
+		var str="";
+		
+		for (var i = 0; i < BooksCarrito.length; i++) {
+			var brows = BooksCarrito[i];	
+			str += "<div class='col-md-3 col-sm-6 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
+			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
+		}
+
+        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
+		var tableReady = str;
+		var tableContainer = document.getElementById("table_div");
+		tableContainer.innerHTML =  tableReady;
+	});
+	
+	modalValues();
+
+}
+function buscarLibros(search){
+
+	BooksCarrito = cargarLibros();
+	
+
+	$(document).ready(function() {
+    //do jQuery stuff when DOM is ready
+	
+		var str="";
+		
+		for (var i = 0; i < Books.length; i++) {
+			var brows = Books[i]; 
+			contains = brows.name.toLowerCase().indexOf(search.toLowerCase());
+			if( contains != -1){
+			str += "<div class='col-md-3 col-sm-6 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
+			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
+			}			
+
+		}
+
+        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
+		var tableReady = str;
+		var tableContainer = document.getElementById("table_div");
+		tableContainer.innerHTML =  tableReady;
+	});
+
+		modalValues();
+	
+}
+//a function to see if has value, if it does then display the value, if not then display n/a. 
+function checkForVal(val) {
+ return val || 'n/a'; 
+}
+function modalValues(){
+	
+	$("a[data-toggle=modal]").click(function() 
+    {   
+        var codigo = $(this).attr('id');
+		var Book = Books[codigo-1];
+		
+		var modalName = document.getElementById("bookName"); 
+		var modalDescription = document.getElementById("bookDescription"); 
+		var modalImage = document.getElementById("bookImage"); 
+		var modalPrice = document.getElementById("bookPrice"); 	
+		
+		modalName.innerText = Book.name;
+		modalDescription.innerText = Book.descripcion;
+		modalImage.src = Book.imageUrl;
+		modalPrice.innerText = Book.price;
+		//modalImage
+
+    });
+	
+}
+
 function cargarLibros(){
 	var Books = [{
 			"codigo": "1",
@@ -152,83 +282,4 @@ function cargarLibros(){
 
 	]
 	return Books;
-}
-function loadData(){
-
-	Books = cargarLibros();
-	
-
-	$(document).ready(function() {
-    //do jQuery stuff when DOM is ready
-	
-		var str="";
-		
-		for (var i = 0; i < Books.length; i++) {
-			var brows = Books[i];  
-			str += "<div class='col-md-3 col-sm-6 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
-			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
-		}
-
-        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
-		var tableReady = str;
-		var tableContainer = document.getElementById("table_div");
-		tableContainer.innerHTML =  tableReady;
-	});
-	
-	modalValues();
-
-}
-function buscarLibros(search){
-
-	Books = cargarLibros();
-	
-
-	$(document).ready(function() {
-    //do jQuery stuff when DOM is ready
-	
-		var str="";
-		
-		for (var i = 0; i < Books.length; i++) {
-			var brows = Books[i]; 
-			contains = brows.name.toLowerCase().indexOf(search.toLowerCase());
-			if( contains != -1){
-			str += "<div class='col-md-3 col-sm-6 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
-			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
-			}			
-
-		}
-
-        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
-		var tableReady = str;
-		var tableContainer = document.getElementById("table_div");
-		tableContainer.innerHTML =  tableReady;
-	});
-
-		modalValues();
-	
-}
-//a function to see if has value, if it does then display the value, if not then display n/a. 
-function checkForVal(val) {
- return val || 'n/a'; 
-}
-function modalValues(){
-	
-	$("a[data-toggle=modal]").click(function() 
-    {   
-        var codigo = $(this).attr('id');
-		var Book = Books[codigo-1]
-		
-		var modalName = document.getElementById("bookName"); 
-		var modalDescription = document.getElementById("bookDescription"); 
-		var modalImage = document.getElementById("bookImage"); 
-		var modalPrice = document.getElementById("bookPrice"); 	
-		
-		modalName.innerText = Book.name;
-		modalDescription.innerText = Book.descripcion;
-		modalImage.src = Book.imageUrl;
-		modalPrice.innerText = Book.price;
-		//modalImage
-
-    });
-	
 }

@@ -16,9 +16,18 @@ $(function() {
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(' ') >= 0) {
                 firstName = name.split(' ').slice(0, -1).join(' ');
+				
+				
+			var email = 'magova80@gmail.com';
+			var subject = 'Orden de libros ' + name;
+			var emailBody = message;
+			var attach = 'path';
+			document.location.href = "mailto:"+email+"?subject="+subject+"&body="+emailBody+"?attach="+attach;
+						
             }
             $.ajax({
-                url: "././mail/contact_me.php",
+				//this is just a http function and does not work locally
+                url: "mail/contact_me.php",
                 type: "POST",
                 data: {
                     name: name,
@@ -68,3 +77,17 @@ $(function() {
 $('#name').focus(function() {
     $('#success').html('');
 });
+
+function sendMail(){
+	    var name = $("input#name").val();
+        var email = $("input#email").val();
+        var phone = $("input#phone").val();
+        var message = $("textarea#message").val();
+        var email = 'magova80@gmail.com';
+        var subject = 'Orden de libros ' + name;
+        var emailBody = message;
+        var attach = 'path';
+        document.location.href = "mailto:"+email+"?subject="+subject+"&body="+emailBody+"?attach="+attach;
+	
+}
+

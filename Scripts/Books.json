@@ -1,5 +1,4 @@
 {
-	"Books": [{
 			"codigo": "1",
 			"name": "Justice League, Vol. 1: Origin (The New 52)",
 			"descripcion": "As a part of the monumental DC Comics—The New 52 event, comics superstars Geoff Johns and Jim Lee bring you an all-new origin story for the Justice League! In a world where inexperienced superheroes operate under a cloud of suspicion from the public, loner vigilante Batman has stumbled upon a dark evil that threatens to destroy the earth as we know it. Now, faced with a threat far beyond anything he can handle on his own, the Dark Knight must trust an alien, a scarlet speedster, an accidental teenage hero, a space cop, an Amazon Princess and an undersea monarch. Will this combination of Superman, The Flash, Cyborg, Green Lantern, Wonder Woman and Aquaman be able to put aside their differences and come together to save the world? Or will they destroy each other firstIn one of the most game-changing titles in comic industry history, Geoff Johns and Jim Lee re-imagine the classic heroes of the DC Universe for the 21st century. This volume collects issues #1-6 of Justice League, part of the DC Comics—The New 52 event.",
@@ -119,7 +118,11 @@
 			"descripcion": "The iconic super-heroes unite when longtime Superman enemy Lex Luthor, now president of the United States, accuses Superman of a crime against humanity, and assembles a top-secret team of powerhouse heroes to bring Superman in -- dead or alive. And in the second storyarc, prepare for the arrival of Supergirl! Batman has discovered something strange on the bottom of Gotham Bay, which leads him to a mysterious and powerful teenaged girl bent on destroying Gotham City! What's her connection to Superman? Why does Wonder Woman want to hide her from the outside world? And will Darkseid succeed in recruiting her into doing his bidding?",
 			"imageUrl": "Scripts/Book/Cover/20.jpg",
 			"price": "9.99"
+		}, 
+		{
+			"codigo": "21",
+			"name": "Superman/Batman Vol. 1",
+			"descripcion": "The iconic super-heroes unite when longtime Superman enemy Lex Luthor, now president of the United States, accuses Superman of a crime against humanity, and assembles a top-secret team of powerhouse heroes to bring Superman in -- dead or alive. And in the second storyarc, prepare for the arrival of Supergirl! Batman has discovered something strange on the bottom of Gotham Bay, which leads him to a mysterious and powerful teenaged girl bent on destroying Gotham City! What's her connection to Superman? Why does Wonder Woman want to hide her from the outside world? And will Darkseid succeed in recruiting her into doing his bidding?",
+			"imageUrl": "Scripts/Book/Cover/1.jpg",
+			"price": "9.99"
 		}
-
-	]
-}
