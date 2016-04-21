@@ -98,14 +98,14 @@ function loadCarritoData(){
 	modalValues();
 
 }
-function buscarLibros(search){
-
+function buscarLibros(search,e){
+	
+	e.preventDefault();
 	Books = cargarLibros();
 	
 
 	$(document).ready(function() {
     //do jQuery stuff when DOM is ready
-	
 		var str="";
 		
 		for (var i = 0; i < Books.length; i++) {
@@ -134,7 +134,6 @@ function buscarLibrosCarrito(search){
 
 	$(document).ready(function() {
     //do jQuery stuff when DOM is ready
-	
 		var str="";
 		
 		for (var i = 0; i < BooksCarrito.length; i++) {
