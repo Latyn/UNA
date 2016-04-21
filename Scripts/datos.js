@@ -1,8 +1,11 @@
+
+//carga el string de datos y lo envia para ser transformado a formato JSON
 function loadCarrito(){
   prods=retrieveCarritoFromString(datos);
   storeCarrito("Productos",prods);
 }
 
+//convierte a formato JSON el string
 function retrieveCarritoFromString(jsonString){
  return JSON.parse(jsonString,revive);
 }
@@ -17,16 +20,38 @@ function definePrototype(){
 		
 	}
 }
+function retrieveCarrito(id){
+  var jsonCarrito = localStorage.getItem(id);
+  if(jsonCarrito === null){
+	return new Carrito();
+  }
+  else{
+	 return JSON.parse(jsonCarrito, 'Carrito');
+  }
+}
 
 function agregarAlCarro(codLibro){
 	
 		
 		var Books =  cargarLibros();
-		var Libro = Books[codLibro-1];
+		var Lib = Books[codLibro-1];
 		var carrito = localStorage.getItem('carrito');
+		
+		var compras = retrieveCarrito('Compras');
 
+		ordenLibros = new Carrito();
+		
+		
+		// Si ya exiten item en el carro se guardan en la nueva instancia para ser sustituidos
+		if(compras.items.length > 0){			
+					ordenLibros.items = compras.items;	
+		}
+				
 		if(carrito != null  && carrito != ""){
-			var json =  carrito + "," + JSON.stringify(Libro);
+			
+			// se crea el carrito de compras
+			
+			var json =  carrito + "," + JSON.stringify(Lib);
 			localStorage.setItem('carrito', json);
 		}
 		else{
@@ -36,8 +61,22 @@ function agregarAlCarro(codLibro){
 
 	
 		var json = localStorage.getItem('carrito');
-		var obj = JSON.parse(json);
-	
+		var obj = JSON.parse("[" +json+"]");
+		
+		loadCarritoDB();
+		if(BooksCarrito.length > 0 ){
+			
+			$.each(BooksCarrito, function(i){
+				if(BooksCarrito[i].codigo == codLibro) {
+					ordenLibros.add(new Libro(BooksCarrito[i].codigo, BooksCarrito[i].name, BooksCarrito[i].descripcion, BooksCarrito[i].imageUrl, BooksCarrito[i].price, 0));
+					return false;
+				}
+			});
+			
+		}
+		
+		// guardar carrito
+	    localStorage.setItem('Compras', JSON.stringify(ordenLibros,'Carrito'));
 }
 
 function borrarDelCarro(codigoLibro){
@@ -46,15 +85,7 @@ function borrarDelCarro(codigoLibro){
 		loadCarritoDB();
 		var carrito = localStorage.getItem('carrito');
 		var index = 0;
-				
-		/*for (var i = 0; i < BooksCarrito.length; i++) {
-			if(BooksCarrito[i].codigo == codigoLibro){
-				index = i;
-			}			
-		}*/
-		
-
-		
+			
 		if(BooksCarrito.length > 0 ){
 			
 			$.each(BooksCarrito, function(i){
@@ -94,7 +125,6 @@ function loadData(){
 			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
 		}
 
-        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
 		var tableReady = str;
 		var tableContainer = document.getElementById("table_div");
 		tableContainer.innerHTML =  tableReady;
@@ -125,11 +155,12 @@ function loadCarritoData(){
 			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
 		}
 
-        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
 		var tableReady = str;
 		var tableContainer = document.getElementById("table_div");
 		tableContainer.innerHTML =  tableReady;
 	});
+	
+	
 	
 	modalValues();
 
@@ -154,7 +185,6 @@ function buscarLibros(search,e){
 
 		}
 
-        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
 		var tableReady = str;
 		var tableContainer = document.getElementById("table_div");
 		tableContainer.innerHTML =  tableReady;
@@ -182,7 +212,6 @@ function buscarLibrosCarrito(search){
 
 		}
 
-        //<div class='row'><h4>"+checkForVal(brows.name)+"</h4></div>
 		var tableReady = str;
 		var tableContainer = document.getElementById("table_div");
 		tableContainer.innerHTML =  tableReady;
