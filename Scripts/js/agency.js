@@ -24,3 +24,50 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+function loadMenu(){
+	$('document').ready(function(){
+		$('#mainMenu').append("<div class='container'>"+
+								"<div class='navbar-header page-scroll'>"+
+								"<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>"+
+								"<span class='sr-only'>Toggle navigation</span>"+
+								"<span class='icon-bar'></span>"+
+								"<span class='icon-bar'></span>"+
+								"<span class='icon-bar'></span></button>"+
+								"<a class='navbar-brand page-scroll' href='index.html'>The Library</a></div>"+
+								"<!-- Collect the nav links, forms, and other content for toggling -->"+
+								"<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>"+
+								"<ul class='nav navbar-nav navbar-right'>"+
+								"<li class='hidden'><a href='#page-top'></a></li>"+
+								"<li><a class='page-scroll' href='#services'>Services</a></li>"+
+								"<li><a class='page-scroll' href='#portfolio'>Busqueda de libros</a></li>"+
+								"<li><a class='page-scroll' href='#about'>Acerca de Nosotros</a></li>"+
+								"<li><a class='page-scroll' href='#team'>Equipo</a></li>"+
+								"<li><a class='page-scroll' href='#contact'>Contactanos</a></li>"+
+								"<li><span class='fa-stack fa-2x'><a href='Carrito.html'><i class='fa fa-circle fa-stack-2x text-primary'></i><i class='fa fa-shopping-cart fa-stack-1x fa-inverse'></i></a></span></li>"+
+								"</ul></div><!-- /.navbar-collapse --></div>");
+	});
+}
+function loadMenuRef(){
+	$('document').ready(function(){
+		$('#mainMenu').append("<div class='container'>"+
+								"<div class='navbar-header page-scroll'>"+
+								"<button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>"+
+								"<span class='sr-only'>Toggle navigation</span>"+
+								"<span class='icon-bar'></span>"+
+								"<span class='icon-bar'></span>"+
+								"<span class='icon-bar'></span></button>"+
+								"<a class='navbar-brand page-scroll' href='index.html'>The Library</a></div>"+
+								"<!-- Collect the nav links, forms, and other content for toggling -->"+
+								"<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>"+
+								"<ul class='nav navbar-nav navbar-right'>"+
+								"<li class='hidden'><a href='#page-top'></a></li>"+
+								"<li><a class='page-scroll' href='Index.html#services'>Services</a></li>"+
+								"<li><a class='page-scroll' href='Busqueda.html'>Busqueda de libros</a></li>"+
+								"<li><a class='page-scroll' href='Informacion.html'>Acerca de Nosotros</a></li>"+
+								"<li><a class='page-scroll' href='Index.html#team'>Equipo</a></li>"+
+								"<li><a class='page-scroll' href='Contacto.html'>Contactanos</a></li>"+
+								"<li><span class='fa-stack fa-2x'><a href='Carrito.html'><i class='fa fa-circle fa-stack-2x text-primary'></i><i class='fa fa-shopping-cart fa-stack-1x fa-inverse'></i></a></span></li>"+
+								"</ul></div><!-- /.navbar-collapse --></div>");
+	});
+}

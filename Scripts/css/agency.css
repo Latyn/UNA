@@ -10,3 +10,9 @@ body{overflow-x:hidden;font-family:"Roboto Slab","Helvetica Neue",Helvetica,Aria
 .marginT{
 	margin-top: 150px;
 }
+.oBackground{
+	background-color: black;
+}
+.marginBody{
+	margin-top: 100px;
+}
