@@ -79,15 +79,14 @@ $('#name').focus(function() {
 });
 
 function sendMail(){
-	    var name = $("input#name").val();
-        var email = $("input#email").val();
-        var phone = $("input#phone").val();
-        var message = $("textarea#message").val();
-        var email = 'magova80@gmail.com';
+	    var name = $('#name')[0].value;
+        var email = $('#email')[0].value;
+        var message = $('#message')[0].innerText;
+        var email = email;
         var subject = 'Orden de libros ' + name;
         var emailBody = message;
         var attach = 'path';
-        document.location.href = "mailto:"+email+"?subject="+subject+"&body="+emailBody+"?attach="+attach;
+        document.location.href = "mailto:"+email+"?subject="+subject+"&body="+emailBody;
 	
 }
 
