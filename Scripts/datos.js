@@ -37,6 +37,9 @@ function agregarAlCarro(codLibro){
 		var Lib = Books[codLibro-1];
 		var carrito = localStorage.getItem('carrito');
 		
+		var cant = $("#c"+codLibro);		
+		cantidad = cant[0].value;
+		
 		var compras = retrieveCarrito('Compras');
 
 		ordenLibros = new Carrito();
@@ -47,32 +50,10 @@ function agregarAlCarro(codLibro){
 					ordenLibros.items = compras.items;	
 		}
 				
-		if(carrito != null  && carrito != ""){
-			
-			// se crea el carrito de compras
-			
-			var json =  carrito + "," + JSON.stringify(Lib);
-			localStorage.setItem('carrito', json);
-		}
-		else{
-			var json = JSON.stringify(Lib);
-			localStorage.setItem('carrito', json);
-		}
+		if(Lib != null ){
 
+		ordenLibros.add(new Libro(Lib.codigo, Lib.name, Lib.descripcion, Lib.imageUrl, Lib.price, cantidad));
 	
-		var json = localStorage.getItem('carrito');
-		var obj = JSON.parse("[" +json+"]");
-		
-		loadCarritoDB();
-		if(obj.length > 0 ){
-			
-			$.each(obj, function(i){
-				if(obj[i].codigo == codLibro) {
-					ordenLibros.add(new Libro(obj[i].codigo, obj[i].name, obj[i].descripcion, obj[i].imageUrl, obj[i].price, 0));
-					return false;
-				}
-			});
-			
 		}
 		
 		// guardar carrito
@@ -133,8 +114,8 @@ function loadData(){
 		
 		for (var i = 0; i < Books.length; i++) {
 			var brows = Books[i];	
-			str += "<div class='col-sm-2 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
-			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad</p></div><div class='col-sm-12 paddingB'><input type='number' min='0' max='10' value='1' step='1' onkeydown='return false' /></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
+			str += "<div class='col-sm-12 col-md-2  portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb center-block' alt=''></a>";			
+			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad</p></div><div class='col-sm-12 paddingB'><input id="+"c"+checkForVal(brows.codigo)+" type='number' min='0' max='10' value='1' step='1' onkeydown='return false' /></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
 		}
 
 		var tableReady = str;
@@ -163,7 +144,7 @@ function loadCarritoData(){
 		if(BooksCarrito.items.length > 0){
 			for (var i = 0; i < BooksCarrito.items.length; i++) {
 				var brows = BooksCarrito.items[i];	
-				str += "<div class='col-sm-2 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
+				str += "<div class='col-sm-12 col-md-2  portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
 				str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
 			}
 		}
@@ -196,7 +177,7 @@ function buscarLibros(search,e){
 			var brows = Books[i]; 
 			contains = brows.name.toLowerCase().indexOf(search.toLowerCase());
 			if( contains != -1){
-			str += "<div class='col-sm-2 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
+			str += "<div class='col-sm-12 col-md-2 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
 			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad</p></div><div class='col-sm-12 paddingB'><input type='number' min='0' max='10' value='1' step='1' onkeydown='return false' /></div><div class='col-sm-12'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
 			}			
 
