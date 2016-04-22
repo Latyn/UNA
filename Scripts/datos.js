@@ -175,7 +175,8 @@ function loadCarritoData(){
 				str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div><div col-sm-12><p class='text-muted'>Total "+brows.total.toFixed(2)+"</p></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
 			}
 			
-	        det = "<div class='col-lg-6 paddingB'><h3 class='text-muted'>Precio total de la orden: $"+fullAmount+"</h3></div>"
+			det +="<div class='col-lg-12 text-centered' style='text-align:center'><a href='Envio.html' class='page-scroll btn btn-xl'>Envio de Detalles</a></div>"
+	        det += "<div class='col-lg-12 paddingB'><h3 class='text-muted'>Precio total de la orden: $"+fullAmount+"</h3></div>"
 			var tableDetallesContainer = document.getElementById("detalles_div");
 			tableDetallesContainer.innerHTML =  det;
 		}
@@ -273,6 +274,44 @@ function modalValues(){
 
     });
 	
+}
+
+function loadCarritoMessage(){
+	
+	loadBd();
+	loadCarritoDB();
+    var fullAmount = 0;
+	//$(document).ready(function() {
+    //do jQuery stuff when DOM is ready
+	
+		var str="";
+		var det="";
+		
+		if(BooksCarrito.items.length > 0){
+			for (var i = 0; i < BooksCarrito.items.length; i++) {
+				var brows = BooksCarrito.items[i];	
+				fullAmount = parseFloat(fullAmount) + parseFloat(brows.total);
+				str += "<div class='col-sm-12 col-md-2'>"+checkForVal(brows.name)+"</div>";			
+				str += "<div><div class='row paddingB'><div class='row'><div col-sm-12><p>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div><div col-sm-12><p class='text-muted'>Total "+brows.total.toFixed(2)+"</p></div></div></div></div></div></div>";
+			}
+			
+	        str += "<div class='col-lg-6 paddingB'><h4 class='text-muted'>Precio total de la orden: $"+fullAmount+"</h4></div>"
+
+		}
+		else{
+			str = "<div class='col-lg-6 col-lg-offset-3 text-muted'><h1>No hay libros agregados!</h1></div>"
+		}
+
+			var tableReady = str;
+			var tableContainer = document.getElementById("message");
+			tableContainer.innerHTML =  tableReady;
+		
+	//});
+	
+	
+	
+	modalValues();
+
 }
 
 function cargarLibros(){
