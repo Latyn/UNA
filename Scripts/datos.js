@@ -291,8 +291,8 @@ function loadCarritoMessage(){
 			for (var i = 0; i < BooksCarrito.items.length; i++) {
 				var brows = BooksCarrito.items[i];	
 				fullAmount = parseFloat(fullAmount) + parseFloat(brows.total);
-				str += "<div class='col-sm-12 col-md-2'>"+checkForVal(brows.name)+"</div>";			
-				str += "<div><div class='row paddingB'><div class='row'><div col-sm-12><p>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div><div col-sm-12><p class='text-muted'>Total "+brows.total.toFixed(2)+"</p></div></div></div></div></div></div>";
+				str += "<div class='row'><div class='col-sm-12 col-md-2'><h4>"+checkForVal(brows.name)+"</h4></div></div>";			
+				str += "<div class='row'><div class='col-sm-12 paddingB'><h4>Cantidad "+brows.cantidad+"</h4></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div><div col-sm-12><p class='text-muted'>Total "+brows.total.toFixed(2)+"</p></div></div></div></div>";
 			}
 			
 	        str += "<div class='col-lg-6 paddingB'><h4 class='text-muted'>Precio total de la orden: $"+fullAmount+"</h4></div>"
