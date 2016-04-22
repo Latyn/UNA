@@ -171,40 +171,29 @@ function loadCarritoData(){
 }
 function buscarLibros(search,e){
 	
+	loadBd();
 	e.preventDefault();
-	Books = cargarLibros();
-	
-    var fullAmount = 0;
-	//$(document).ready(function() {
+
+	$(document).ready(function() {
     //do jQuery stuff when DOM is ready
 	
 		var str="";
-		var det="";
 		
-		if(BooksCarrito.items.length > 0){
-			for (var i = 0; i < BooksCarrito.items.length; i++) {
-				var brows = BooksCarrito.items[i];	
-				fullAmount = parseFloat(fullAmount) + parseFloat(brows.total);
-				contains = brows.name.toLowerCase().indexOf(search.toLowerCase());
-				if( contains != -1){
-					str += "<div class='col-sm-12 col-md-2  portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
-					str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div><div col-sm-12><p class='text-muted'>Total "+brows.total.toFixed(2)+"</p></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
-				}
+		for (var i = 0; i < Books.length; i++) {
+			var brows = Books[i];	
+			contains = brows.name.toLowerCase().indexOf(search.toLowerCase());
+			if( contains != -1){
+				str += "<div class='col-sm-12 col-md-2  portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb center-block' alt=''></a>";			
+				str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad</p></div><div class='col-sm-12 paddingB'><input id="+"c"+checkForVal(brows.codigo)+" type='number' min='0' max='10' value='1' step='1' onkeydown='return false' /></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.price)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='agregarAlCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Agregar</a></div></div></div></div></div>";
 			}
-			
-	        det = "<div class='col-lg-6 paddingB'><h3 class='text-muted'>Precio total de la orden: $"+fullAmount+"</h3></div>"
-			var tableDetallesContainer = document.getElementById("detalles_div");
-			tableDetallesContainer.innerHTML =  det;
-		}
-		else{
-			str = "<div class='col-lg-6 col-lg-offset-3 text-muted'><h1>No hay libros agregados!</h1></div>"
 		}
 
-			var tableReady = str;
-			var tableContainer = document.getElementById("table_div");
-			tableContainer.innerHTML =  tableReady;
-
-		modalValues();
+		var tableReady = str;
+		var tableContainer = document.getElementById("table_div");
+		tableContainer.innerHTML =  tableReady;
+	});
+	
+	modalValues();
 	
 }
 function buscarLibrosCarrito(search,e){
