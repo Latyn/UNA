@@ -164,7 +164,7 @@ function loadCarritoData(){
 			for (var i = 0; i < BooksCarrito.items.length; i++) {
 				var brows = BooksCarrito.items[i];	
 				str += "<div class='col-sm-2 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
-				str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
+				str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
 			}
 		}
 		else{
@@ -224,7 +224,7 @@ function buscarLibrosCarrito(search){
 			contains = brows.name.toLowerCase().indexOf(search.toLowerCase());
 			if( contains != -1){
 			str += "<div class='col-sm-2 portfolio-item'><a href='#portfolioModal1' class='portfolio-link' data-toggle='modal' id="+checkForVal(brows.codigo)+"><div class='portfolio-hover'><div class='portfolio-hover-content'><i class='fa fa-plus fa-3x'></i></div></div><img src="+checkForVal(brows.imageUrl)+" class='img-responsive tumb' alt=''></a>";			
-			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
+			str += "<div class='portfolio-caption'><div class='row paddingB'><div class='row'><div col-sm-12><p class='text-muted'>Cantidad "+brows.cantidad+"</p></div><div class='col-sm-12 paddingB'><h4>"+'$'+checkForVal(brows.precio)+"</h4></div></div><div class='col-sm-12'><a href='#' onclick='borrarDelCarro("+checkForVal(brows.codigo)+");' class='btn btn-primary'>Borrar</a></div></div></div></div></div>";
 			}			
 
 		}
