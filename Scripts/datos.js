@@ -176,7 +176,7 @@ function loadCarritoData(){
 			}
 			
 			det +="<div class='col-lg-12 text-centered' style='text-align:center'><a href='Envio.html' class='page-scroll btn btn-xl'>Envio de Detalles</a></div>"
-	        det += "<div class='col-lg-12 paddingB'><h3 class='text-muted'>Precio total de la orden: $"+fullAmount+"</h3></div>"
+	        det += "<div class='col-lg-12 paddingB'><h3 class='text-muted'>Precio total de la orden: $"+fullAmount.toFixed(2)+"</h3></div>"
 			var tableDetallesContainer = document.getElementById("detalles_div");
 			tableDetallesContainer.innerHTML =  det;
 		}
