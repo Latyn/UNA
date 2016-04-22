@@ -210,8 +210,9 @@ function buscarLibros(search,e){
 		modalValues();
 	
 }
-function buscarLibrosCarrito(search){
-
+function buscarLibrosCarrito(search,e){
+	
+	e.preventDefault();
 	loadCarritoDB();
 	
 
