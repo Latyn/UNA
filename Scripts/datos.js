@@ -61,9 +61,34 @@ function agregarAlCarro(codLibro){
 }
 
 function borrarDelCarro(codigoLibro){
-	
+	    loadCarritoDB();
 		
-		loadCarritoDB();
+		var compras = retrieveCarrito('Compras');
+
+		ordenLibros = new Carrito();
+		
+		if(compras.items.length > 0){			
+			ordenLibros.items = compras.items;	
+		}
+		
+		if(BooksCarrito.items.length > 0 ){
+			
+			$.each(BooksCarrito.items, function(i){
+				if(BooksCarrito.items[i].codigo == codigoLibro) {
+					BooksCarrito.items.splice(i,1);
+					ordenLibros.remove(i);
+					return false;
+				}
+			});
+			
+		}
+				
+		
+		// guardar carrito
+	    localStorage.setItem('Compras', JSON.stringify(ordenLibros,'Carrito'));
+		
+		
+		/*loadCarritoDB();
 		var carrito = localStorage.getItem('carrito');
 		var compras = localStorage.getItem('Compras');
 		
@@ -94,7 +119,7 @@ function borrarDelCarro(codigoLibro){
 			});		
 		}
 		
-		localStorage.setItem('Compras', JSON.stringify(ordenLibros,'Carrito'));
+		localStorage.setItem('Compras', JSON.stringify(ordenLibros,'Carrito'));*/
 		
 	    loadCarritoData();
 }
